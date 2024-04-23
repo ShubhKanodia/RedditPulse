@@ -83,10 +83,18 @@ def stream_processing(df):
         .orderBy("window")
     tweet_counts.show(truncate=False)
 
-    # Group tweets by hashtags
-    hashtag_groups = df.groupBy("hashtags").count().orderBy(desc("count"))
-    hashtag_groups.show(truncate=False)
+    # Group tweets by hashtags within a 5-second sliding window
+    windowed_hashtag_groups = df \
+        .withWatermark("timestamp", "5 seconds") \
+        .groupBy(
+            window("timestamp", "5 seconds", "1 second"),
+            "hashtags"
+        ) \
+        .count() \
+        .orderBy("window")
 
+    windowed_hashtag_groups.show(truncate=False)
+    
     # Apply aggregate functions on numerical data within 5-second sliding windows
     window_spec = Window.partitionBy("topic").orderBy("timestamp").rowsBetween(-5, 0)
     agg_df = df.select("*",
