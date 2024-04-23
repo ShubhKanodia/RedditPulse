@@ -52,19 +52,19 @@ kafka-topics.sh --create --topic fielding_topic --bootstrap-server localhost:909
 4. Generate and populate the CSV file with simulated tweets:
 
 ```bash
-python generate_tweets.py
+python generate_new_tweets.py
 ```
 
 5. Run the Kafka producer to send tweets to the respective topics:
 
 ```bash
-python producer.py
+python twitter_producer.py
 ```
 
 6. In a new terminal, run the Kafka consumer to consume tweets from the topics, perform real-time streaming analysis using Apache Spark, and populate the MySQL database:
 
 ```bash
-python consumer.py
+python twitter_consumer.py
 ```
 
 7. After running the consumer, run the batch processing script to perform the same analysis on the entire dataset stored in the MySQL database:
