@@ -61,10 +61,12 @@ python generate_new_tweets.py
 python twitter_producer.py
 ```
 
-6. In a new terminal, run the Kafka consumer to consume tweets from the topics, perform real-time streaming analysis using Apache Spark, and populate the MySQL database:
+6. In a new terminal, run the Kafka spark consumer to consume tweets from the topics, perform real-time streaming analysis using Apache Spark, and populate the MySQL database:
 
 ```bash
-python twitter_consumer.py
+ spark-3.5.1-bin-hadoop3 % ./bin/spark-submit \
+  --packages org.apache.spark:spark-sql-kafka-0-10_2.12:3.5.1 \
+  /path/to/twitter_consumer.py
 ```
 
 7. After running the consumer, run the batch processing script to perform the same analysis on the entire dataset stored in the MySQL database:
