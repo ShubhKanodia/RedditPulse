@@ -38,6 +38,8 @@
 # print("Aggregate stats for likes:")
 # agg_df.show(truncate=False)
 
+
+
 import mysql.connector
 from tabulate import tabulate  # Install tabulate: pip install tabulate
 

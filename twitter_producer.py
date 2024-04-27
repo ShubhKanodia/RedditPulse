@@ -165,10 +165,10 @@ def delivery_report(err, msg):
     else:
         print(f"Message delivered to {msg.topic()} partition [{msg.partition()}]")
 
-def kafka_producer(filename, bootstrap_servers='localhost:9092', delay=5):
+def kafka_producer(filename, bootstrap_servers='localhost:9092', delay=0.1):
     conf = {'bootstrap.servers': bootstrap_servers}
     producer = Producer(conf)
-
+    
     with open(filename, 'r', encoding='utf-8') as file:
         reader = csv.DictReader(file)
         for row in reader:
@@ -176,6 +176,8 @@ def kafka_producer(filename, bootstrap_servers='localhost:9092', delay=5):
             data_str = f"{row['text']},{row['topic']},{row['sentiment']},{row['likes']},{row['hashtags']},{row['timestamp']}"
             # Produce the tweet to the corresponding Kafka topic
             producer.produce(f"{row['topic']}_topic", value=data_str.encode('utf-8'), callback=delivery_report)
+            print(f"{row['topic']}_topic")
+            
             print(f"Produced tweet to {row['topic'].capitalize()} topic: {row['text']}")
             time.sleep(delay)  # Simulate a delay between producing messages
 

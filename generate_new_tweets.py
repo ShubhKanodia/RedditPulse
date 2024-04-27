@@ -46,11 +46,11 @@ for _ in range(num_tweets):
     
     tweet_text = fake.sentence(nb_words=6, variable_nb_words=True, ext_word_list=word_list)
     if sentiment == 'positive':
-        tweet_text = f"{topic.capitalize()} was {tweet_text}. #{sentiment}"
+        tweet_text = f"{topic.capitalize()} was {tweet_text}. "
     elif sentiment == 'negative':
-        tweet_text = f"{topic.capitalize()} was {tweet_text}. #{sentiment}"
+        tweet_text = f"{topic.capitalize()} was {tweet_text}. "
     else:
-        tweet_text = f"{tweet_text} in {topic}. #{sentiment}"
+        tweet_text = f"{tweet_text} in {topic}. "
     
     # Generate additional columns
     likes = random.randint(0, 1000)  # Random number of likes
