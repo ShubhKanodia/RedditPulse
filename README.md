@@ -24,7 +24,7 @@ RedditPulse is a sophisticated data pipeline that fetches, processes, and analyz
 
 ### Clone the repository:
 ```bash
-git clone https://github.com/YourUsername/RedditPulse.git
+git clone https://github.com/ShubhKanodia/RedditPulse.git
 ```
 
 ### Install dependencies:
